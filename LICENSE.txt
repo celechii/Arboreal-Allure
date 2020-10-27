@@ -1,0 +1,41 @@
+All software sources in this project are licensed under the terms found in SOFTWARE_LICENSE.txt in the root directory of this project, unless otherwise specified within that source file.
+
+All audio files within this project are only permitted for use within the scope of experimenting with this project. No license is granted, nor are they issued under Creative Commons. 
+
+All image files within this project are only permitted for use within the scope of experimenting with this project. No license is granted, nor are they issued under Creative Commons. 
+
+© 2020 Noé Charron except where otherwise noted.
+
+The following files are "© 2020 Justin Wabs"
+- ambience.wav
+- chase_drone.wav
+- compass_close.wav
+- compass_open.wav
+- death_sting.wav
+- drone.wav
+- escape_sting.wav
+- footstep_transtion.wav
+- forest_scare.wav
+- gear.wav
+- hum.wav
+- map_close.wav
+- map_open.wav
+- crow_1.wav
+- crow_2.wav
+- crow_3.wav
+- ambience.wav.meta
+- chase_drone.wav.meta
+- compass_close.wav.meta
+- compass_open.wav.meta
+- death_sting.wav.meta
+- drone.wav.meta
+- escape_sting.wav.meta
+- footstep_transtion.wav.meta
+- forest_scare.wav.meta
+- gear.wav.meta
+- hum.wav.meta
+- map_close.wav.meta
+- map_open.wav.meta
+- crow_1.wav.meta
+- crow_2.wav.meta
+- crow_3.wav.meta
