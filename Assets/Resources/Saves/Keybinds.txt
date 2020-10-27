@@ -1,0 +1,18 @@
+{
+    "actions": [
+        {
+            "name": "Show Map",
+            "positive": 120,
+            "negative": 0,
+            "modifiedPositive": 120,
+            "modifiedNegative": 0
+        },
+        {
+            "name": "Show Compass",
+            "positive": 99,
+            "negative": 0,
+            "modifiedPositive": 99,
+            "modifiedNegative": 0
+        }
+    ]
+}
