@@ -25,6 +25,8 @@ public class GameOverScreen : MonoBehaviour {
 
 	private Image bg;
 	private AudioSource audioSource;
+	private Coroutine resetCoroutine;
+	private bool isFading;
 
 	private void Awake() {
 		control = this;
@@ -32,15 +34,28 @@ public class GameOverScreen : MonoBehaviour {
 		audioSource = GetComponent<AudioSource>();
 	}
 
-	#if UNITY_EDITOR
 	private void Update() {
-		if (Input.GetKeyDown(KeyCode.Q))
+		#if UNITY_EDITOR
+		if (Input.GetKeyDown(KeyCode.R))
 			ResetGame();
+		if (Input.GetKeyDown(KeyCode.Q)) {
+			WorldControl.gameOver = true;
+			ShowEndScreen(false);
+		}
+		#endif
+
+		if (!WorldControl.gameOver) {
+			if (InputManager.GetAxisDown("Difficulty") && !isFading) {
+				Difficulty.Level += InputManager.GetAxis("Difficulty");
+				if (resetCoroutine != null)
+					StopCoroutine(resetCoroutine);
+				resetCoroutine = StartCoroutine(Reset(false, 1f));
+			}
+		}
 	}
-	#endif
 
 	private void Start() {
-		StartCoroutine(FadeBG(false));
+		StartCoroutine(FadeBG(false, fadeInTime));
 	}
 
 	public void ShowEndScreen(bool win) {
@@ -73,10 +88,11 @@ public class GameOverScreen : MonoBehaviour {
 		}
 	}
 
-	private IEnumerator FadeBG(bool on) {
+	private IEnumerator FadeBG(bool on, float time) {
+		isFading = true;
 		Color col = bg.color;
-		for (float elapsed = 0; elapsed < fadeInTime; elapsed += Time.deltaTime) {
-			col.a = elapsed / fadeInTime;
+		for (float elapsed = 0; elapsed < time; elapsed += Time.deltaTime) {
+			col.a = elapsed / time;
 			if (!on)
 				col.a = 1 - col.a;
 			bg.color = col;
@@ -84,6 +100,7 @@ public class GameOverScreen : MonoBehaviour {
 		}
 		col.a = on ? 1 : 0;
 		bg.color = col;
+		isFading = false;
 	}
 
 	private IEnumerator ShowScreen(bool win) {
@@ -92,7 +109,7 @@ public class GameOverScreen : MonoBehaviour {
 			yield return StartCoroutine(FogControl.control.Perish());
 
 		canvasGroup.alpha = 0;
-		yield return StartCoroutine(FadeBG(true));
+		yield return StartCoroutine(FadeBG(true, fadeInTime / 2f));
 
 		for (float elapsed = 0; elapsed < fadeInTime; elapsed += Time.deltaTime) {
 			canvasGroup.alpha = elapsed / fadeInTime;
@@ -101,12 +118,21 @@ public class GameOverScreen : MonoBehaviour {
 		canvasGroup.alpha = 1;
 	}
 
-	private IEnumerator Reset() {
+	private IEnumerator Reset(bool fadeCanvasGroup = true, float delay = 0) {
+
+		yield return new WaitForSeconds(delay);
+
 		canvasGroup.interactable = false;
-		for (float elapsed = 0; elapsed < fadeInTime; elapsed += Time.deltaTime) {
-			canvasGroup.alpha = 1 - (elapsed / fadeInTime);
-			yield return null;
-		}
+		if (fadeCanvasGroup) {
+			for (float elapsed = 0; elapsed < fadeInTime; elapsed += Time.deltaTime) {
+				canvasGroup.alpha = 1 - (elapsed / fadeInTime);
+				yield return null;
+			}
+		} else
+			yield return StartCoroutine(FadeBG(true, .5f));
+
+		resetCoroutine = null;
+
 		canvasGroup.alpha = 0;
 		WorldControl.gameOver = false;
 		Gear.hasGear = false;

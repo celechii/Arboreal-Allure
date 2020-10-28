@@ -13,6 +13,13 @@
             "negative": 0,
             "modifiedPositive": 99,
             "modifiedNegative": 0
+        },
+        {
+            "name": "Difficulty",
+            "positive": 273,
+            "negative": 274,
+            "modifiedPositive": 273,
+            "modifiedNegative": 274
         }
     ]
 }

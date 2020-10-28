@@ -22,7 +22,8 @@ public class Timer : MonoBehaviour {
 	}
 
 	public int startTimeHour;
-	public int startTimeMinutes;
+	[Tooltip("the start times at different difficulties")]
+	public int[] startTimeMinutes = new int[4];
 	public bool midnightGracePeriod;
 	public float gracePeriod;
 	public float deathPeriod;
@@ -40,7 +41,10 @@ public class Timer : MonoBehaviour {
 	}
 
 	public void StartTimer() {
-		date = new DateTime(2019, 10, 13, startTimeHour + 12, startTimeMinutes, 0);
+		if (Difficulty.config.minutesToMidnight == 0)
+			date = new DateTime(2019, 10, 13, 0, 0, 0);
+		else
+			date = new DateTime(2019, 10, 13, startTimeHour + 12, 60 - Difficulty.config.minutesToMidnight, 0);
 
 		gracePeriod = GetSeconds(gracePeriod);
 		deathPeriod = GetSeconds(deathPeriod);
