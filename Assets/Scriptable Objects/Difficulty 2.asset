@@ -15,3 +15,5 @@ MonoBehaviour:
   name: No Time To Waste
   minutesToMidnight: 2
   deathPeriod: 2
+  targetExitDangerLevel: 0.7
+  resetDeathTimerOnEscape: 0

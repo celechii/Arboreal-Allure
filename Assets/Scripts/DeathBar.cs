@@ -96,7 +96,8 @@ public class DeathBar : MonoBehaviour {
 
 	public void StartBar() {
 		currentTime = maxTime;
-		numResets = 0;
+		if (Difficulty.config.resetDeathTimerOnEscape)
+			numResets = 0;
 		foreach (Image f in fillBars)
 			f.fillAmount = 1;
 		text.enabled = false;

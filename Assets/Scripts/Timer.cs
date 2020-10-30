@@ -42,7 +42,7 @@ public class Timer : MonoBehaviour {
 
 	public void StartTimer() {
 		if (Difficulty.config.minutesToMidnight == 0)
-			date = new DateTime(2019, 10, 13, 0, 0, 0);
+			date = new DateTime(2019, 10, 14, 0, 0, 0);
 		else
 			date = new DateTime(2019, 10, 13, startTimeHour + 12, 60 - Difficulty.config.minutesToMidnight, 0);
 

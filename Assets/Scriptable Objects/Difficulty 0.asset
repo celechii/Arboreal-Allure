@@ -15,3 +15,5 @@ MonoBehaviour:
   name: Sweet Dreams
   minutesToMidnight: 10
   deathPeriod: 2.5
+  targetExitDangerLevel: 0.15
+  resetDeathTimerOnEscape: 1

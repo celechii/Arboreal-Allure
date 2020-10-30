@@ -15,3 +15,5 @@ MonoBehaviour:
   name: Nightmare Sleepwalking
   minutesToMidnight: 0
   deathPeriod: 4
+  targetExitDangerLevel: 0.9
+  resetDeathTimerOnEscape: 0

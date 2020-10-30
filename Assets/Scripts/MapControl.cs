@@ -71,12 +71,13 @@ public class MapControl : MonoBehaviour {
 
 	private void SetBridgePos() {
 		Vector2Int idealPos = new Vector2Int();
-		float midVal = 1;
+		float closestDist = 100;
 		for (int x = 0; x < mapSize.x; x++) {
 			for (int y = 0; y < mapSize.y; y++) {
 				if (x == 0 || y == 0 || x == mapSize.x - 1 || y == mapSize.y - 1) {
-					if (Mathf.Abs(scarecrowZone[x, y] - .5f) < midVal) {
-						midVal = Mathf.Abs(scarecrowZone[x, y] - .5f);
+					float dist = Mathf.Abs(scarecrowZone[x, y] - Difficulty.config.targetExitDangerLevel);
+					if (dist < closestDist) {
+						closestDist = dist;
 						idealPos.x = x;
 						idealPos.y = y;
 					}
